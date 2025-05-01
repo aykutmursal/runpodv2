@@ -73,7 +73,6 @@ RUN set -ex \
  && git clone --depth 1 https://github.com/ltdrdata/ComfyUI-Impact-Pack comfyui-impact-pack \
  && pip install --no-cache-dir -r comfyui-impact-pack/requirements.txt \
  && git clone --depth 1 https://github.com/rgthree/rgthree-comfy.git \
- && pip install --no-cache-dir -r rgthree-comfy/requirements.txt \   # ★ eklendi
  && git clone --depth 1 https://github.com/kijai/ComfyUI-KJNodes.git \
  && pip install --no-cache-dir -r ComfyUI-KJNodes/requirements.txt \
  && git clone --depth 1 https://github.com/kijai/ComfyUI-Florence2.git \
