@@ -49,57 +49,67 @@ RUN mkdir -p /comfyui/models/diffusion_models && \
 # --- Diffusion model 1: hidream_i1_dev_bf16 ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
     mkdir -p /comfyui/models/diffusion_models && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/diffusion_models/hidream_i1_dev_bf16.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/diffusion_models/hidream_i1_dev_bf16.safetensors?download=true&token=${HF_TOKEN}" && \
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/diffusion_models/hidream_i1_dev_bf16.safetensors?download=true" && \
     [ -f "/comfyui/models/diffusion_models/hidream_i1_dev_bf16.safetensors" ] && \
     echo "Successfully downloaded hidream_i1_dev_bf16.safetensors"
 
 # --- Text encoders - İstediğiniz formatla ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
     mkdir -p /comfyui/models/text_encoders && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/clip_l_hidream.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/clip_l_hidream.safetensors?download=true&token=${HF_TOKEN}" && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/clip_l_hidream.safetensors?download=true" && \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/clip_g_hidream.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/clip_g_hidream.safetensors?download=true&token=${HF_TOKEN}" && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/clip_g_hidream.safetensors?download=true" && \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/t5xxl_fp8_e4m3fn_scaled.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/t5xxl_fp8_e4m3fn_scaled.safetensors?download=true&token=${HF_TOKEN}" && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/t5xxl_fp8_e4m3fn_scaled.safetensors?download=true" && \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/llama_3.1_8b_instruct_fp8_scaled.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/llama_3.1_8b_instruct_fp8_scaled.safetensors?download=true&token=${HF_TOKEN}"
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/text_encoders/llama_3.1_8b_instruct_fp8_scaled.safetensors?download=true"
 
 # --- Orijinal text encoder dosyalarını da ekleyelim ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/clip_l.safetensors \
-      "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_l.safetensors?download=true&token=${HF_TOKEN}" && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+      "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/clip_l.safetensors?download=true" && \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/text_encoders/t5xxl_fp8_e4m3fn.safetensors \
-      "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors?download=true&token=${HF_TOKEN}"
+      "https://huggingface.co/Comfy-Org/stable-diffusion-3.5-fp8/resolve/main/text_encoders/t5xxl_fp8_e4m3fn.safetensors?download=true"
 
 # --- VAE - İstediğiniz formatla ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
     mkdir -p /comfyui/models/vae && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/vae/ae.safetensors \
-      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/vae/ae.safetensors?download=true&token=${HF_TOKEN}"
+      "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/vae/ae.safetensors?download=true"
 
 # --- VAE - FLUX1 ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
     mkdir -p /comfyui/models/vae/FLUX1 && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/vae/FLUX1/ae.safetensors \
-      "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors?download=true&token=${HF_TOKEN}"
+      "https://huggingface.co/black-forest-labs/FLUX.1-schnell/resolve/main/ae.safetensors?download=true"
 
 # --- LoRA ---
 RUN --mount=type=cache,target=/tmp/wget-cache \
     mkdir -p /comfyui/models/loras && \
-    wget --continue --retry-connrefused --waitretry=10 -t 10 --timeout=60 \
+    wget -c --retry-connrefused --waitretry=5 -t 5 \
+      --header="Authorization: Bearer ${HF_TOKEN}" \
       -O /comfyui/models/loras/comfyui_portrait_lora64.safetensors \
-      "https://huggingface.co/ali-vilab/ACE_Plus/resolve/main/portrait/comfyui_portrait_lora64.safetensors?download=true&token=${HF_TOKEN}"
+      "https://huggingface.co/ali-vilab/ACE_Plus/resolve/main/portrait/comfyui_portrait_lora64.safetensors?download=true"
 
 ###############################################################################
 # Custom nodes (her biri ayrı katmanda)
