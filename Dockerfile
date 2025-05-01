@@ -42,10 +42,10 @@ RUN set -ex \
  && wget -q --continue --retry-connrefused --waitretry=5 -t 5 \
       -O /comfyui/models/diffusion_models/hidream_i1_dev_bf16.safetensors \
       "https://huggingface.co/Comfy-Org/HiDream-I1_ComfyUI/resolve/main/split_files/diffusion_models/hidream_i1_dev_bf16.safetensors?download=true&token=${HF_TOKEN}" \
- && wget -q --continue --retry-connrefused --waitretry=5 -t 5 \
-      --header="Authorization: Bearer ${CIVI_TOKEN}" \
-      -O /comfyui/models/diffusion_models/fluxFillFP8_v10.safetensors \
-      "https://civitai.com/api/download/models/1085456?type=Model&format=SafeTensor&size=full&fp=fp8&download=true" \
+ && curl -L --fail --retry 5 --retry-delay 5 \
+      -H "Authorization: Bearer ${CIVI_TOKEN}" \
+      -o /comfyui/models/diffusion_models/fluxFillFP8_v10.safetensors \
+      "https://civitai.com/api/download/models/1085456?type=Model&format=SafeTensor&size=full&fp=fp8" \
  \
  #── Checkpoint
  && mkdir -p /comfyui/models/checkpoints \
