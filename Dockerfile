@@ -46,13 +46,7 @@ RUN set -ex \
       -H "Authorization: Bearer ${CIVI_TOKEN}" \
       -o /comfyui/models/diffusion_models/fluxFillFP8_v10.safetensors \
       "https://civitai.com/api/download/models/1085456?type=Model&format=SafeTensor&size=full&fp=fp8" \
- \
- #── Checkpoint
- && mkdir -p /comfyui/models/checkpoints \
- && wget -q --continue --retry-connrefused --waitretry=5 -t 5 \
-      -O /comfyui/models/checkpoints/flux1-dev-fp8.safetensors \
-      "https://huggingface.co/Comfy-Org/flux1-dev/resolve/main/flux1-dev-fp8.safetensors?download=true&token=${HF_TOKEN}" \
- \
+\
  #── LoRA
  && mkdir -p /comfyui/models/loras \
  && wget -q --continue --retry-connrefused --waitretry=5 -t 5 \
