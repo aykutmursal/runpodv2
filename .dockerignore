@@ -1,0 +1,53 @@
+############  KAYNAK KOD DIŞI  ############
+.git
+.github
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+*.log
+*.md
+LICENSE
+README*
+CHANGELOG*
+
+############  PYTHON / BUILD  ############
+__pycache__/
+*.py[co]
+*.pyo
+*.egg-info/
+build/
+dist/
+.eggs/
+.cache/
+.coverage
+.tox/
+pytest_cache/
+
+############  NOTEBOOK / DATA  ############
+*.ipynb
+*.csv
+*.jsonl
+*.parquet
+*.tfrecord
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+
+############  TEST / DEMO GÖRSELLER  ############
+tests/
+examples/
+sample_images/
+test_input.json          # start.sh yine mountluyor, local test edip sonra .dockerignore’a alabilirsin
+
+############  LOKAL / TEMP  ############
+env/
+.venv/
+*.env
+*.bak
+tmp/
+temp/

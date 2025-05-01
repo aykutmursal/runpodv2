@@ -1,0 +1,18 @@
+services:
+  comfyui-worker:
+    image: ${COMFY_IMAGE:-aykutmursalo/aykutci-20250501-fp8bf16}
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - SERVE_API_LOCALLY=true
+    ports:
+      - "8000:8000"
+      - "8188:8188"
+    volumes:
+      - ./data/comfyui/output:/comfyui/output
+      - ./data/runpod-volume:/runpod-volume
