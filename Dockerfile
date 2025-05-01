@@ -39,10 +39,9 @@ ARG CIVI_TOKEN
 # --- Civitai modeli (özellikle önemli olanı önce indirelim) ---
 RUN mkdir -p /comfyui/models/diffusion_models && \
     echo "Downloading fluxFillFP8_v10.safetensors from Civitai..." && \
-    aria2c --max-tries=10 --retry-wait=10 --timeout=60 --connect-timeout=60 --allow-overwrite=true \
-      --split=8 --max-connection-per-server=8 --dir=/comfyui/models/diffusion_models \
-      --out=fluxFillFP8_v10.safetensors \
-      --header="Authorization: Bearer ${CIVI_TOKEN}" \
+    curl -L --fail --retry 5 --retry-delay 5 \
+      -H "Authorization: Bearer ${CIVI_TOKEN}" \
+      -o /comfyui/models/diffusion_models/fluxFillFP8_v10.safetensors \
       "https://civitai.com/api/download/models/1085456?type=Model&format=SafeTensor&size=full&fp=fp8" && \
     [ -f "/comfyui/models/diffusion_models/fluxFillFP8_v10.safetensors" ] && \
     echo "Successfully downloaded fluxFillFP8_v10.safetensors"
