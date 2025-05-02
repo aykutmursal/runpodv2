@@ -23,9 +23,9 @@ RUN python3 -m pip install --no-cache-dir comfy-cli==1.3.8 runpod requests && \
     yes | comfy --workspace /comfyui install --cuda-version 12.4 --nvidia
 
 # — helper dosyalar —
-ADD src/extra_model_paths.yaml /
+COPY src/extra_model_paths.yaml /
 WORKDIR /
-ADD src/start.sh src/restore_snapshot.sh src/rp_handler.py test_input.json /
+COPY src/start.sh src/restore_snapshot.sh src/rp_handler.py test_input.json /
 RUN chmod +x /start.sh /restore_snapshot.sh
 
 ###############################################################################
@@ -161,5 +161,11 @@ RUN ls -la /comfyui/models/diffusion_models/ && \
 FROM build_models AS final
 
 ENV MODEL_TYPE=dev-bf16
-ENTRYPOINT ["/start.sh"]   # rsync + 127.0.0.1:8188 (UI dışa kapalı)
-CMD []
+
+# Fix line endings in case of Windows editing
+RUN sed -i 's/\r$//' /start.sh && \
+    # Double-check executable permissions
+    chmod +x /start.sh /restore_snapshot.sh
+
+# Çalışan yapılandırmanın anahtarı: ENTRYPOINT yerine CMD kullanmak
+CMD ["/start.sh"]
